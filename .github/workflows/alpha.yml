@@ -45,3 +45,4 @@ jobs:
           tag_name: alpha
           body: alpha (builds on every commit to main branch)
           files: dist/Flight\ Tracker.exe
+          fail_on_unmatched_files: true
