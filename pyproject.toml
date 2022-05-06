@@ -6,7 +6,7 @@ authors = ["Alex Chesters <10558792+AlexChesters@users.noreply.github.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "3.10"
+python = ">=3.10,<4.0"
 simconnect = {git = "git@github.com:AlexChesters/Python-SimConnect.git"}
 
 [tool.poetry.dev-dependencies]
