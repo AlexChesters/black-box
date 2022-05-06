@@ -2,6 +2,7 @@ import time
 import sys
 
 from .utils.logger import Logger
+from .utils.env import is_development_environment
 from .results.results_writer import ResultsWriter
 from .simulator.flight import Flight, SimulatorConnectionError
 
@@ -21,4 +22,4 @@ def main():
     while True:
         logger.log("appending record")
         results_writer.append_record(flight.get_data())
-        time.sleep(3)
+        time.sleep(3 if is_development_environment() else 30)
