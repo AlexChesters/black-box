@@ -1,0 +1,28 @@
+-
+  name: altitude
+  var: PLANE_ALTITUDE
+  type: integer
+-
+  name: latitude
+  var: PLANE_LATITUDE
+  type: float
+-
+  name: longitude
+  var: PLANE_LONGITUDE
+  type: float
+-
+  name: ground_speed
+  var: GROUND_VELOCITY
+  type: integer
+-
+  name: heading
+  var: PLANE_HEADING_DEGREES_TRUE
+  type: integer
+-
+  name: on_ground
+  var: SIM_ON_GROUND
+  type: bool
+-
+  name: fuel
+  var: FUEL_TOTAL_QUANTITY_WEIGHT
+  type: integer
