@@ -23,16 +23,25 @@ def main():
     window.title("Flight Tracker")
     window.geometry("800x800")
 
+    top_frame = tkinter.Frame(window)
+    top_frame.pack(side="top")
+    bottom_frame = tkinter.Frame(window)
+    bottom_frame.pack(side="bottom")
+
     tkinter.Label(
-        window,
-        text=f"Beginning flight tracking, output file is {results_writer.output_file_path}"
+        top_frame,
+        text=f"Beginning flight tracking, output file is {results_writer.output_file_path}",
+        font=("Arial Bold", 14),
+        wraplength=800,
+        justify="center"
     ).grid(column=0, row=0)
 
     def process():
         results_writer.append_record(flight.get_data())
         tkinter.Label(
-            window,
-            text=f"Data last written at {datetime.datetime.now().isoformat()}"
+            bottom_frame,
+            text=f"Data last written at {datetime.datetime.now().isoformat()}",
+            font=("Arial Bold", 10)
         ).grid(column=0, row=1)
         window.after(3000 if is_development_environment() else 30000, process)
 
