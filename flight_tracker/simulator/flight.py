@@ -1,4 +1,5 @@
 import datetime
+import math
 from dataclasses import dataclass
 
 import SimConnect
