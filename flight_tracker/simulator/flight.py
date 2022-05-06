@@ -21,7 +21,8 @@ class Flight:
             "latitude",
             "longitude",
             "ground_speed",
-            "heading"
+            "heading",
+            "on_ground"
         ]
 
     def get_data(self):
@@ -30,11 +31,13 @@ class Flight:
         longitude = self.aircraft_requests.find("PLANE_LONGITUDE")
         ground_speed = self.aircraft_requests.find("GROUND_VELOCITY")
         heading = self.aircraft_requests.find("PLANE_HEADING_DEGREES_TRUE")
+        on_ground = self.aircraft_requests.find("SIM_ON_GROUND")
 
         return {
             "altitude": int(altitude.get()),
             "latitude": float(latitude.get()),
             "longitude": float(longitude.get()),
             "ground_speed": int(ground_speed.get()),
-            "heading": int(math.degrees(heading.get()))
+            "heading": int(math.degrees(heading.get())),
+            "on_ground": int(on_ground.get())
         }
