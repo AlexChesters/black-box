@@ -36,13 +36,13 @@ jobs:
       - name: update tag
         run: |
           git tag -d alpha
-          git push origin :refs/tags/alpha
+          git push --delete origin alpha
           git tag alpha
-          git push origin alpha
+          git push --tags
       - name: upload application
         uses: softprops/action-gh-release@v1
         with:
           tag_name: alpha
           body: alpha (builds on every commit to main branch)
-          files: dist/Flight\ Tracker.exe
+          files: dist/Flight Tracker.exe
           fail_on_unmatched_files: true
