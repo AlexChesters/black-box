@@ -2,6 +2,8 @@ import math
 
 import SimConnect
 
+from ..utils.env import is_development_environment
+
 class SimulatorConnectionError(Exception):
     pass
 
@@ -13,8 +15,12 @@ class Flight:
             raise SimulatorConnectionError from e
 
         five_seconds = 5000
+        thirty_seconds = 30000
 
-        self.aircraft_requests = SimConnect.AircraftRequests(sim_connect, _time=five_seconds)
+        self.aircraft_requests = SimConnect.AircraftRequests(
+            sim_connect,
+            _time=five_seconds if is_development_environment() else thirty_seconds
+        )
         self.fieldnames = [
             "timestamp",
             "altitude",

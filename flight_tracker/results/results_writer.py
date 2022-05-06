@@ -4,6 +4,8 @@ import csv
 import uuid
 import datetime
 
+from ..utils.env import is_development_environment
+
 # absolute path to the directory name this script lives in
 SCRIPT_DIR = os.path.dirname(__file__)
 
@@ -23,7 +25,7 @@ class ResultsWriter:
         except FileExistsError:
             pass
 
-        if ENVIRONMENT == "development":
+        if is_development_environment():
             self.output_file_path = os.path.join(SCRIPT_DIR, "../../", "results.csv")
         else:
             self.output_file_path = os.path.join(
