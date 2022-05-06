@@ -1,5 +1,5 @@
 import math
-from re import M
+import datetime
 
 import SimConnect
 
@@ -34,6 +34,7 @@ class Flight:
         ]
 
     def get_data(self):
+        timestamp = datetime.datetime.now().isoformat()
         altitude = self.aircraft_requests.find("PLANE_ALTITUDE")
         latitude = self.aircraft_requests.find("PLANE_LATITUDE")
         longitude = self.aircraft_requests.find("PLANE_LONGITUDE")
@@ -43,6 +44,7 @@ class Flight:
         fuel = self.aircraft_requests.find("FUEL_TOTAL_QUANTITY_WEIGHT")
 
         return {
+            "timestamp": str(timestamp),
             "altitude": int(altitude.get()),
             "latitude": float(latitude.get()),
             "longitude": float(longitude.get()),

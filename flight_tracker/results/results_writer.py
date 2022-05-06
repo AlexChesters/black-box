@@ -2,7 +2,6 @@ from operator import delitem
 import os
 import csv
 import uuid
-import datetime
 
 from ..utils.env import is_development_environment
 
@@ -37,8 +36,6 @@ class ResultsWriter:
             writer.writeheader()
 
     def append_record(self, record):
-        record.update({"timestamp": datetime.datetime.now().isoformat()})
-
         with open(self.output_file_path, "a", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=self._fieldnames)
             writer.writerow(record)
