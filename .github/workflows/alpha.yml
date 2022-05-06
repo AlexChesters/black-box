@@ -37,4 +37,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: alpha
+          body: alpha (builds on every commit to main branch)
           files: dist/Flight\ Tracker.exe
