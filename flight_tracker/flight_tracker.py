@@ -4,7 +4,7 @@ import sys
 import SimConnect
 
 from .utils.logger import Logger
-from .utils.results_writer import ResultsWriter
+from .results.results_writer import ResultsWriter
 
 def main():
     logger = Logger()
