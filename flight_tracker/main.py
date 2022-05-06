@@ -2,8 +2,8 @@ import time
 
 import SimConnect
 
-from utils.logger import Logger
-from utils.results_writer import ResultsWriter
+from .utils.logger import Logger
+from .utils.results_writer import ResultsWriter
 
 logger = Logger()
 results_writer = ResultsWriter()
