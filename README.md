@@ -7,9 +7,9 @@ outputs information from a current MSFS flight to a CSV file in `~/Documents/Fli
 # can I use it?
 if you have the PC version of MSFS then yes (although be aware that currently this program is an alpha so don't expect perfection)
 
-1. head to [releases/alpha](https://github.com/AlexChesters/flight-tracker/releases/tag/alpha) to download the executable (`flight_tracker.exe`)
+1. head to [releases/alpha](https://github.com/AlexChesters/flight-tracker/releases/tag/alpha) to download the executable (`Flight Tracker.exe`)
 1. place the executable wherever you'd like (it doesn't need to be on the same drive that MSFS is installed on, but it does need to be on the same PC)
-1. run `flight_tracker.exe` once you've spawned into your aircraft
+1. run `Flight Tracker.exe` once you've spawned into your aircraft
 
 # development instructions
 

@@ -12,4 +12,4 @@ clean:
 	rm -rf dist
 
 build: clean test
-	poetry run pyinstaller --name flight_tracker --console --onefile --add-binary "./vendor/SimConnect.dll:." main.py
+	poetry run pyinstaller --name "Flight Tracker" --console --onefile --add-binary "./vendor/SimConnect.dll:." main.py
