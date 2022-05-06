@@ -1,5 +1,6 @@
 import time
 import sys
+from tkinter import messagebox
 
 from .utils.logger import Logger
 from .utils.env import is_development_environment
@@ -12,7 +13,11 @@ def main():
     try:
         flight = Flight()
     except SimulatorConnectionError:
-        logger.error("Could not connect to Flight Simulator. Verify the simulator is running.")
+        messagebox.showerror(
+            "Connection error",
+            "Could not connect to Flight Simulator. Verify the simulator is running."
+        )
+        sys.exit(1)
         sys.exit(1)
 
     results_writer = ResultsWriter(flight.fieldnames)
