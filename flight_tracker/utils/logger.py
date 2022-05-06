@@ -6,3 +6,4 @@ class Logger:
 
     def error(self, msg):
         print(f"[{datetime.datetime.now().isoformat()}] - ERROR: {msg}")
+        
