@@ -3,7 +3,7 @@ import sys
 
 from .utils.logger import Logger
 from .results.results_writer import ResultsWriter
-from .simulator_api.flight import Flight, SimulatorConnectionError
+from .simulator.flight import Flight, SimulatorConnectionError
 
 def main():
     logger = Logger()
