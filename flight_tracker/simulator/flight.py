@@ -1,3 +1,5 @@
+import math
+
 import SimConnect
 
 class SimulatorConnectionError(Exception):
@@ -18,7 +20,8 @@ class Flight:
             "altitude",
             "latitude",
             "longitude",
-            "ground_speed"
+            "ground_speed",
+            "heading"
         ]
 
     def get_data(self):
@@ -26,10 +29,12 @@ class Flight:
         latitude = self.aircraft_requests.find("PLANE_LATITUDE")
         longitude = self.aircraft_requests.find("PLANE_LONGITUDE")
         ground_speed = self.aircraft_requests.find("GROUND_VELOCITY")
+        heading = self.aircraft_requests.find("PLANE_HEADING_DEGREES_TRUE")
 
         return {
             "altitude": str(altitude.get()),
             "latitude": float(latitude.get()),
             "longitude": float(longitude.get()),
-            "ground_speed": int(ground_speed.get())
+            "ground_speed": int(ground_speed.get()),
+            "heading": int(math.degrees(heading.get()))
         }
