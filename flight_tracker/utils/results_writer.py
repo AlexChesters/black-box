@@ -25,6 +25,6 @@ class ResultsWriter:
             writer.writeheader()
 
     def append_record(self, **record):
-        with open(self.output_file_path, "w", newline="", encoding="utf-8") as f:
+        with open(self.output_file_path, "a", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=self._fieldnames)
             writer.writerow(record)
