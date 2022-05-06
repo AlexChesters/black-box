@@ -33,16 +33,13 @@ jobs:
       - name: build application
         run: make build
         shell: bash
-      - name: update tag
-        run: |
-          git tag -d alpha
-          git push --delete origin alpha
-          git tag alpha
-          git push --tags
-      - name: upload application
-        uses: softprops/action-gh-release@v1
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          tag_name: alpha
-          body: alpha (builds on every commit to main branch)
-          files: "dist/Flight Tracker.exe"
-          fail_on_unmatched_files: true
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: arn:aws:iam::008356366354:role/projects-live-bucket-BucketUploadRole-1USRJUF87S00F
+          role-duration-seconds: 900
+      - name: deploy
+        run: aws s3 sync "dist/Flight Tracker.exe" s3://projects-live-bucket-bucket-llkgmktc4xmo/flight-tracker --cache-control max-age=60 --acl public-read --delete
