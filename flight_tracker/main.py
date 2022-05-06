@@ -11,8 +11,8 @@ results_writer = ResultsWriter()
 logger.log(f"beginning flight tracking, output file is {results_writer.output_file_path}")
 
 sm = SimConnect.SimConnect()
-TWO_SECONDS = 2000
-aq = SimConnect.AircraftRequests(sm, _time=TWO_SECONDS)
+FIVE_SECONDS = 5000
+aq = SimConnect.AircraftRequests(sm, _time=FIVE_SECONDS)
 
 altitude = aq.find("PLANE_ALTITUDE")
 latitude = aq.find("PLANE_LATITUDE")
