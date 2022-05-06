@@ -18,5 +18,8 @@ jobs:
         run: echo "C:\Users\runneradmin\AppData\Roaming\Python\Scripts" >> $GITHUB_PATH
         shell: bash
       - name: install deps
-        run: poetry install
+        run: make install
+        shell: bash
+      - name: build application
+        run: make build
         shell: bash
