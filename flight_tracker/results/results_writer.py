@@ -31,7 +31,7 @@ class ResultsWriter:
             writer = csv.DictWriter(f, fieldnames=self._fieldnames)
             writer.writeheader()
 
-    def append_record(self, **record):
+    def append_record(self, record):
         record.update({"timestamp": datetime.datetime.now().isoformat()})
 
         with open(self.output_file_path, "a", newline="", encoding="utf-8") as f:
