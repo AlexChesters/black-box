@@ -17,6 +17,9 @@ jobs:
       - name: set path
         run: echo "C:\Users\runneradmin\AppData\Roaming\Python\Scripts" >> $GITHUB_PATH
         shell: bash
+      - name: pwd
+        run: pwd
+        shell: bash
       - name: install deps
         run: make install
         shell: bash
