@@ -1,6 +1,6 @@
-import math
 import datetime
 import os
+from dataclasses import dataclass
 
 import SimConnect
 import yaml
@@ -14,6 +14,7 @@ FLIGHT_DATA_CONFIG_FILE_PATH = os.path.join(SCRIPT_DIR, "flight_data.yml")
 class SimulatorConnectionError(Exception):
     pass
 
+@dataclass
 class Flight:
     def __init__(self):
         try:

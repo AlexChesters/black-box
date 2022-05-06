@@ -1,7 +1,7 @@
-from operator import delitem
 import os
 import csv
 import uuid
+from dataclasses import dataclass
 
 from ..utils.env import is_development_environment
 
@@ -10,6 +10,7 @@ SCRIPT_DIR = os.path.dirname(__file__)
 
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "production")
 
+@dataclass
 class ResultsWriter:
     def __init__(self, fieldnames):
         self._fieldnames = fieldnames
