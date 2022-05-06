@@ -14,3 +14,9 @@ jobs:
       - name: install poetry
         run: curl -sSL https://install.python-poetry.org | python3 -
         shell: bash
+      - name: set path
+        run: echo "C:\Users\runneradmin\AppData\Roaming\Python\Scripts" >> $GITHUB_PATH
+        shell: bash
+      - name: install deps
+        run: poetry install
+        shell: bash
