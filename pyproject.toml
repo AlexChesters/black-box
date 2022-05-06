@@ -8,6 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
 simconnect = {git = "https://github.com/AlexChesters/Python-SimConnect.git"}
+typing-extensions = "^4.2.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.8"
