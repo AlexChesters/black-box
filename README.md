@@ -1,5 +1,5 @@
 # flight-tracker
-simple flight tracker for msfs
+simple flight tracker for [msfs](https://www.flightsimulator.com/)
 
 # development instructions
 
