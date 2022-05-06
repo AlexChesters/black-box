@@ -3,7 +3,7 @@ import os
 import csv
 import uuid
 
-from SimConnect import *
+import SimConnect
 
 docs_path = os.path.join(
     os.path.expanduser("~/Documents"),
@@ -13,9 +13,9 @@ output_file_path = os.path.join(docs_path, f"{str(uuid.uuid4())}.csv")
 
 print(f"beginning flight tracking, output file is {output_file_path}")
 
-sm = SimConnect()
-two_seconds = 2000
-aq = AircraftRequests(sm, _time=two_seconds)
+sm = SimConnect.SimConnect()
+TWO_SECONDS = 2000
+aq = SimConnect.AircraftRequests(sm, _time=TWO_SECONDS)
 
 try:
     os.mkdir(docs_path)
@@ -24,13 +24,13 @@ except FileExistsError:
 
 altitude = aq.find("PLANE_ALTITUDE")
 
-with open(output_file_path, "w", newline="") as f:
+with open(output_file_path, "w", newline="", encoding="utf-8") as f:
     fieldnames = ["altitude"]
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     writer.writeheader()
 
 while True:
-    with open(output_file_path, "a", newline="") as f:
+    with open(output_file_path, "a", newline="", encoding="utf-8") as f:
         fieldnames = ["altitude"]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writerow({"altitude": str(altitude.get())})
