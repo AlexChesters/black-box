@@ -6,8 +6,8 @@ authors = ["Alex Chesters <10558792+AlexChesters@users.noreply.github.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0"
-simconnect = {git = "git@github.com:AlexChesters/Python-SimConnect.git"}
+python = ">=3.10,<3.11"
+simconnect = {git = "https://github.com/AlexChesters/Python-SimConnect.git"}
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.8"
