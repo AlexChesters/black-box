@@ -4,6 +4,11 @@ import csv
 import uuid
 import datetime
 
+# absolute path to the directory name this script lives in
+SCRIPT_DIR = os.path.dirname(__file__)
+
+ENVIRONMENT = os.environ.get("ENVIRONMENT", "production")
+
 class ResultsWriter:
     def __init__(self, fieldnames):
         self._fieldnames = fieldnames
@@ -18,9 +23,12 @@ class ResultsWriter:
         except FileExistsError:
             pass
 
-        self.output_file_path = os.path.join(
-            docs_path, f"{str(uuid.uuid4())}.csv"
-        )
+        if ENVIRONMENT == "development":
+            self.output_file_path = os.path.join(SCRIPT_DIR, "../../", "results.csv")
+        else:
+            self.output_file_path = os.path.join(
+                docs_path, f"{str(uuid.uuid4())}.csv"
+            )
 
         with open(self.output_file_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=self._fieldnames)
