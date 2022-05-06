@@ -33,6 +33,12 @@ jobs:
       - name: build application
         run: make build
         shell: bash
+      - name: update tag
+        run: |
+          git tag -d alpha
+          git push origin :refs/tags/alpha
+          git tag alpha
+          git push origin alpha
       - name: upload application
         uses: softprops/action-gh-release@v1
         with:
