@@ -49,5 +49,6 @@ class Flight:
             "ground_speed": int(ground_speed.get()),
             "heading": int(math.degrees(heading.get())),
             "on_ground": int(on_ground.get()),
+            # FUEL_TOTAL_QUANTITY_WEIGHT returns lbs, we track kilos
             "fuel": int(int(fuel.get()) / 2.205)
         }
