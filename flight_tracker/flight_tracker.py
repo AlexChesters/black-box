@@ -1,6 +1,6 @@
-import time
+import datetime
 import sys
-from tkinter import messagebox
+import tkinter
 
 from .utils.env import is_development_environment
 from .results.results_writer import ResultsWriter
@@ -10,7 +10,7 @@ def main():
     try:
         flight = Flight()
     except SimulatorConnectionError:
-        messagebox.showerror(
+        tkinter.messagebox.showerror(
             "Connection error",
             "Could not connect to Flight Simulator. Verify the simulator is running."
         )
@@ -18,6 +18,24 @@ def main():
 
     results_writer = ResultsWriter(flight.fieldnames)
 
-    while True:
+    window = tkinter.Tk()
+
+    window.title("Flight Tracker")
+    window.geometry("800x800")
+
+    tkinter.Label(
+        window,
+        text=f"Beginning flight tracking, output file is {results_writer.output_file_path}"
+    ).grid(column=0, row=0)
+
+    def process():
         results_writer.append_record(flight.get_data())
-        time.sleep(3 if is_development_environment() else 30)
+        tkinter.Label(
+            window,
+            text=f"Data last written at {datetime.datetime.now().isoformat()}"
+        ).grid(column=0, row=1)
+        window.after(3000 if is_development_environment() else 30000, process)
+
+    window.after(0, process)
+
+    window.mainloop()
