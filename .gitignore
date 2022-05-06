@@ -130,3 +130,6 @@ dmypy.json
 
 # local results
 results.csv
+
+# editor stuff
+.vscode/
