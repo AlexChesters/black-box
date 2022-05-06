@@ -15,13 +15,13 @@ jobs:
       - name: install poetry
         run: curl -sSL https://install.python-poetry.org | python3 -
         shell: bash
+      - name: set path
+        run: echo "C:\Users\runneradmin\AppData\Roaming\Python\Scripts" >> $GITHUB_PATH
+        shell: bash
       - uses: actions/setup-python@v3
         with:
           python-version: '3.10'
           cache: 'poetry'
-      - name: set path
-        run: echo "C:\Users\runneradmin\AppData\Roaming\Python\Scripts" >> $GITHUB_PATH
-        shell: bash
       - name: debug
         run: pwd && ls -al
         shell: bash
