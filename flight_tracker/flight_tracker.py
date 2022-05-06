@@ -25,6 +25,10 @@ def main():
 
     top_frame = tkinter.Frame(window)
     top_frame.pack(side="top")
+
+    center_frame = tkinter.Frame(window)
+    center_frame.pack(fill="both")
+
     bottom_frame = tkinter.Frame(window)
     bottom_frame.pack(side="bottom")
 
@@ -45,6 +49,13 @@ def main():
         ).grid(column=0, row=1)
         window.after(3000 if is_development_environment() else 30000, process)
 
-    window.after(0, process)
+    def start_process():
+        window.after(0, process)
+
+    tkinter.Button(
+        center_frame,
+        text="Start tracking",
+        command=start_process
+    ).pack()
 
     window.mainloop()
