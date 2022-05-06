@@ -18,7 +18,6 @@ def main():
             "Could not connect to Flight Simulator. Verify the simulator is running."
         )
         sys.exit(1)
-        sys.exit(1)
 
     results_writer = ResultsWriter(flight.fieldnames)
 
