@@ -32,7 +32,7 @@ class Flight:
         heading = self.aircraft_requests.find("PLANE_HEADING_DEGREES_TRUE")
 
         return {
-            "altitude": str(altitude.get()),
+            "altitude": int(altitude.get()),
             "latitude": float(latitude.get()),
             "longitude": float(longitude.get()),
             "ground_speed": int(ground_speed.get()),
