@@ -1,7 +1,5 @@
 ECHO ON
 REM A batch script to execute flight-tracker
 SET PATH=%PATH%;C:\Python310
-SETLOCAL
-poetry run python -m main
-ENDLOCAL
+poetry run python -m flight_tracker.main.py
 PAUSE

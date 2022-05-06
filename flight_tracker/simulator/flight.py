@@ -1,15 +1,9 @@
 import datetime
-import os
 from dataclasses import dataclass
 
 import SimConnect
-import yaml
 
 from ..utils.env import is_development_environment
-
-# absolute path to the directory name this script lives in
-SCRIPT_DIR = os.path.dirname(__file__)
-FLIGHT_DATA_CONFIG_FILE_PATH = os.path.join(SCRIPT_DIR, "flight_data.yml")
 
 class SimulatorConnectionError(Exception):
     pass
@@ -29,32 +23,35 @@ class Flight:
             sim_connect,
             _time=five_seconds if is_development_environment() else thirty_seconds
         )
-
         self.fieldnames = [
-            "timestamp"
+            "timestamp",
+            "altitude",
+            "latitude",
+            "longitude",
+            "ground_speed",
+            "heading",
+            "on_ground",
+            "fuel"
         ]
 
-        with open(FLIGHT_DATA_CONFIG_FILE_PATH, "r", encoding="utf-8") as f:
-            self.flight_data_config = yaml.safe_load(f)
-
-        for entry in self.flight_data_config:
-            self.fieldnames.append(entry["name"])
-
     def get_data(self):
-        result = { "timestamp": datetime.datetime.now().isoformat() }
+        timestamp = datetime.datetime.now().isoformat()
+        altitude = self.aircraft_requests.find("PLANE_ALTITUDE")
+        latitude = self.aircraft_requests.find("PLANE_LATITUDE")
+        longitude = self.aircraft_requests.find("PLANE_LONGITUDE")
+        ground_speed = self.aircraft_requests.find("GROUND_VELOCITY")
+        heading = self.aircraft_requests.find("PLANE_HEADING_DEGREES_TRUE")
+        on_ground = self.aircraft_requests.find("SIM_ON_GROUND")
+        fuel = self.aircraft_requests.find("FUEL_TOTAL_QUANTITY_WEIGHT")
 
-        for entry in self.flight_data_config:
-            name = entry["name"]
-            var = entry["var"]
-
-            value = self.aircraft_requests.find(var).get()
-
-            match entry["type"]:
-                case "integer":
-                    result.update({name: int(value)})
-                case "float":
-                    result.update({name: float(value)})
-                case "bool":
-                    result.update({name: int(value)})
-
-        return result
+        return {
+            "timestamp": str(timestamp),
+            "altitude": int(altitude.get()),
+            "latitude": float(latitude.get()),
+            "longitude": float(longitude.get()),
+            "ground_speed": int(ground_speed.get()),
+            "heading": int(math.degrees(heading.get())),
+            "on_ground": int(on_ground.get()),
+            # FUEL_TOTAL_QUANTITY_WEIGHT returns lbs, we track kilos
+            "fuel": int(int(fuel.get()) / 2.205)
+        }
