@@ -8,7 +8,9 @@ class ResultsWriter:
     def __init__(self):
         self._fieldnames = [
             "timestamp",
-            "altitude"
+            "altitude",
+            "latitude",
+            "longitude"
         ]
 
         docs_path = os.path.join(

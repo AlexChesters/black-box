@@ -15,8 +15,14 @@ TWO_SECONDS = 2000
 aq = SimConnect.AircraftRequests(sm, _time=TWO_SECONDS)
 
 altitude = aq.find("PLANE_ALTITUDE")
+latitude = aq.find("PLANE_LATITUDE")
+longitude = aq.find("PLANE_LONGITUDE")
 
 while True:
     logger.log("appending record")
-    results_writer.append_record(altitude=str(altitude.get()))
+    results_writer.append_record(
+        altitude=str(altitude.get()),
+        latitude=float(latitude.get()),
+        longitude=float(longitude.get())
+    )
     time.sleep(3)
