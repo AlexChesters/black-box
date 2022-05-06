@@ -17,16 +17,19 @@ class Flight:
             "timestamp",
             "altitude",
             "latitude",
-            "longitude"
+            "longitude",
+            "ground_speed"
         ]
 
     def get_data(self):
         altitude = self.aircraft_requests.find("PLANE_ALTITUDE")
         latitude = self.aircraft_requests.find("PLANE_LATITUDE")
         longitude = self.aircraft_requests.find("PLANE_LONGITUDE")
+        ground_speed = self.aircraft_requests.find("GROUND_VELOCITY")
 
         return {
             "altitude": str(altitude.get()),
             "latitude": float(latitude.get()),
-            "longitude": float(longitude.get())
+            "longitude": float(longitude.get()),
+            "ground_speed": int(ground_speed.get())
         }
