@@ -14,7 +14,7 @@ clean:
 build: clean test
 	poetry run pyinstaller \
 		--name "Flight Tracker" \
-		--console \
+		--noconsole \
 		--onefile \
 		--add-binary "./vendor/SimConnect.dll:." \
 		--icon "./assets/flight_tracker.ico" \
