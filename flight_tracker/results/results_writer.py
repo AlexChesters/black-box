@@ -5,13 +5,8 @@ import uuid
 import datetime
 
 class ResultsWriter:
-    def __init__(self):
-        self._fieldnames = [
-            "timestamp",
-            "altitude",
-            "latitude",
-            "longitude"
-        ]
+    def __init__(self, fieldnames):
+        self._fieldnames = fieldnames
 
         docs_path = os.path.join(
             os.path.expanduser("~/Documents"),

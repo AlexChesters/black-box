@@ -14,7 +14,7 @@ def main():
         logger.error("Could not connect to Flight Simulator. Verify the simulator is running.")
         sys.exit(1)
 
-    results_writer = ResultsWriter()
+    results_writer = ResultsWriter(flight.fieldnames)
 
     logger.log(f"beginning flight tracking, output file is {results_writer.output_file_path}")
 

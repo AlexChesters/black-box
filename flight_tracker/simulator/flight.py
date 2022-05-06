@@ -13,6 +13,12 @@ class Flight:
         five_seconds = 5000
 
         self.aircraft_requests = SimConnect.AircraftRequests(sim_connect, _time=five_seconds)
+        self.fieldnames = [
+            "timestamp",
+            "altitude",
+            "latitude",
+            "longitude"
+        ]
 
     def get_data(self):
         altitude = self.aircraft_requests.find("PLANE_ALTITUDE")
