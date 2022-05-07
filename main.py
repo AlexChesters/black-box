@@ -1,3 +1,3 @@
-from flight_tracker import app
+from flight_tracker.app import App
 
-app.main()
+App()

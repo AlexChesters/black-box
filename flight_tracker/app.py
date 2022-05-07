@@ -3,69 +3,62 @@ import datetime
 import tkinter
 
 from .flight_tracker import FlightTracker
+from .utils.env import is_development_environment
 
-def main():
-    window = tkinter.Tk()
+class App:
+    def __init__(self):
+        self._tracker = FlightTracker()
 
-    window.title("Flight Tracker")
-    window.geometry("800x800")
+        self._window = tkinter.Tk()
 
-    top_frame = tkinter.Frame(window)
-    top_frame.pack(side="top")
+        self._window.title("Flight Tracker")
+        self._window.geometry("800x800")
 
-    center_frame = tkinter.Frame(window, pady=35)
-    center_frame.pack()
+        top_frame = tkinter.Frame(self._window)
+        top_frame.pack(side="top")
 
-    bottom_frame = tkinter.Frame(window)
-    bottom_frame.pack(side="bottom")
+        center_frame = tkinter.Frame(self._window, pady=35)
+        center_frame.pack()
 
-    departure = tkinter.StringVar()
-    arrival = tkinter.StringVar()
+        bottom_frame = tkinter.Frame(self._window)
+        bottom_frame.pack(side="bottom")
 
-    tkinter.Label(
-        top_frame,
-        text="Flight Tracker",
-        font=("Arial Bold", 14),
-        wraplength=800,
-        justify="center"
-    ).grid(column=0, row=0)
+        tkinter.Label(
+            top_frame,
+            text="Flight Tracker",
+            font=("Arial Bold", 14),
+            wraplength=800,
+            justify="center"
+        ).grid(column=0, row=0)
 
-    def update():
-        window.update()
+        last_written_label = None # pylint: disable=unused-variable
 
-    def process():
-        tracker = FlightTracker(departure.get(), arrival.get())
-        tracker.start_tracking(on_iteration=update)
+        def process():
+            self._tracker.track()
+            last_written_label = tkinter.Label(
+                bottom_frame,
+                text=f"Data last written at {datetime.datetime.now().isoformat()}",
+                font=("Arial Bold", 10)
+            )
+            last_written_label.grid(column=0, row=2)
+            self._window.after(3000 if is_development_environment() else 30000, process)
 
-    def start_process():
-        window.after(0, process)
+        def start_process():
+            self._window.after(0, process)
 
-    tkinter.Label(
-        bottom_frame,
-        text=f"Data last written at {datetime.datetime.now().isoformat()}",
-        font=("Arial Bold", 10)
-    ).grid(column=0, row=1)
+        tkinter.Button(
+            center_frame,
+            text="Start tracking",
+            height=1,
+            width=20,
+            font=("Arial Bold", 12),
+            command=start_process
+        ).pack()
 
-    tkinter.Label(
-        center_frame,
-        text="Departure ICAO",
-        font=("Arial Bold", 12)
-    ).pack()
-    tkinter.Entry(center_frame, textvariable=departure, font=("Arial Bold", 10)).pack()
-    tkinter.Label(
-        center_frame,
-        text="Arrival ICAO",
-        font=("Arial Bold", 12)
-    ).pack()
-    tkinter.Entry(center_frame, textvariable=arrival, font=("Arial Bold", 10)).pack(pady=10)
+        tkinter.Label(
+            bottom_frame,
+            text=f"Output file is {self._tracker.output_file_path}",
+            font=("Arial Bold", 10)
+        ).grid(column=0, row=1)
 
-    tkinter.Button(
-        center_frame,
-        text="Start tracking",
-        height=1,
-        width=20,
-        font=("Arial Bold", 12),
-        command=start_process
-    ).pack()
-
-    window.mainloop()
+        self._window.mainloop()
