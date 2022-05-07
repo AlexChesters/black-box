@@ -177,7 +177,7 @@ develop = false
 type = "git"
 url = "https://github.com/AlexChesters/Python-SimConnect.git"
 reference = "master"
-resolved_reference = "547cfcd2c254cd1c7e7f365f28f5b7e5e6030dbb"
+resolved_reference = "030a5098b7ff41ba1b21869a493533a2544209e5"
 
 [[package]]
 name = "tomli"
