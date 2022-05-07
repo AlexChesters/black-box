@@ -26,6 +26,7 @@ class Flight:
         )
         self.fieldnames = [
             "timestamp",
+            "aircraft",
             "altitude",
             "latitude",
             "longitude",
@@ -37,6 +38,7 @@ class Flight:
 
     def get_data(self):
         timestamp = datetime.datetime.now().isoformat()
+        aircraft = self.aircraft_requests.find("TITLE")
         altitude = self.aircraft_requests.find("PLANE_ALTITUDE")
         latitude = self.aircraft_requests.find("PLANE_LATITUDE")
         longitude = self.aircraft_requests.find("PLANE_LONGITUDE")
@@ -47,6 +49,7 @@ class Flight:
 
         return {
             "timestamp": str(timestamp),
+            "aircraft": str(aircraft.get()),
             "altitude": int(altitude.get()),
             "latitude": float(latitude.get()),
             "longitude": float(longitude.get()),

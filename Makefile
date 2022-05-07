@@ -2,7 +2,7 @@ install:
 	poetry install
 
 run:
-	ENVIRONMENT=development poetry run python -m main
+	ENVIRONMENT=development poetry run python main.py
 
 test:
 	poetry run pylint flight_tracker main.py
