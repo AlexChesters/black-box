@@ -1,10 +1,12 @@
 import datetime
+from dataclasses import dataclass
 
 import tkinter
 
 from .flight_tracker import FlightTracker
 from .utils.env import is_development_environment
 
+@dataclass
 class App:
     def __init__(self):
         self._tracker = FlightTracker()

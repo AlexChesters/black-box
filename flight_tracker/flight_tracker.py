@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+
 from .results.results_writer import ResultsWriter
 from .simulator.flight import Flight
 
+@dataclass
 class FlightTracker:
     def __init__(self):
         self._flight = Flight()
