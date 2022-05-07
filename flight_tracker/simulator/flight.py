@@ -27,6 +27,8 @@ class Flight:
         self.fieldnames = [
             "timestamp",
             "aircraft",
+            "departure",
+            "arrival",
             "altitude",
             "latitude",
             "longitude",
@@ -35,6 +37,12 @@ class Flight:
             "on_ground",
             "fuel"
         ]
+        self._departure = None
+        self._arrival = None
+
+    def set_departure_arrival(self, icaos):
+        self._departure = icaos[0]
+        self._arrival = icaos[1]
 
     def get_data(self):
         timestamp = datetime.datetime.now().isoformat()
@@ -50,6 +58,8 @@ class Flight:
         return {
             "timestamp": str(timestamp),
             "aircraft": str(aircraft.get()),
+            "departure": str(self._departure),
+            "arrival": str(self._arrival),
             "altitude": int(altitude.get()),
             "latitude": float(latitude.get()),
             "longitude": float(longitude.get()),

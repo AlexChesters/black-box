@@ -26,15 +26,18 @@ def main():
     top_frame = tkinter.Frame(window)
     top_frame.pack(side="top")
 
-    center_frame = tkinter.Frame(window)
-    center_frame.pack(fill="both")
+    center_frame = tkinter.Frame(window, pady=35)
+    center_frame.pack()
 
     bottom_frame = tkinter.Frame(window)
     bottom_frame.pack(side="bottom")
 
+    departure = tkinter.StringVar()
+    arrival = tkinter.StringVar()
+
     tkinter.Label(
         top_frame,
-        text=f"Beginning flight tracking, output file is {results_writer.output_file_path}",
+        text=f"Output file is {results_writer.output_file_path}",
         font=("Arial Bold", 14),
         wraplength=800,
         justify="center"
@@ -50,11 +53,28 @@ def main():
         window.after(3000 if is_development_environment() else 30000, process)
 
     def start_process():
+        flight.set_departure_arrival((departure.get(), arrival.get()))
         window.after(0, process)
+
+    tkinter.Label(
+        center_frame,
+        text="Departure ICAO",
+        font=("Arial Bold", 12)
+    ).pack()
+    tkinter.Entry(center_frame, textvariable=departure, font=("Arial Bold", 10)).pack()
+    tkinter.Label(
+        center_frame,
+        text="Arrival ICAO",
+        font=("Arial Bold", 12)
+    ).pack()
+    tkinter.Entry(center_frame, textvariable=arrival, font=("Arial Bold", 10)).pack(pady=10)
 
     tkinter.Button(
         center_frame,
         text="Start tracking",
+        height=1,
+        width=20,
+        font=("Arial Bold", 12),
         command=start_process
     ).pack()
 
