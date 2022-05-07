@@ -11,7 +11,7 @@ class SimulatorConnectionError(Exception):
 
 @dataclass
 class Flight:
-    def __init__(self):
+    def __init__(self, departure, arrival):
         try:
             sim_connect = SimConnect.SimConnect()
         except ConnectionError as e:
@@ -37,12 +37,8 @@ class Flight:
             "on_ground",
             "fuel"
         ]
-        self._departure = None
-        self._arrival = None
-
-    def set_departure_arrival(self, icaos):
-        self._departure = icaos[0]
-        self._arrival = icaos[1]
+        self._departure = departure
+        self._arrival = arrival
 
     def get_data(self):
         timestamp = datetime.datetime.now().isoformat()
