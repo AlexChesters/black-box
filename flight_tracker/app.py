@@ -35,7 +35,8 @@ class App:
 
         def process():
             self._tracker.track()
-            last_written_text.set(f"Data last written at {datetime.datetime.now().isoformat()}")
+            last_written_timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+            last_written_text.set(f"Data last written at {last_written_timestamp}")
             self._window.after(3000 if is_development_environment() else 30000, process)
 
         def start_process():
