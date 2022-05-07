@@ -31,16 +31,11 @@ class App:
             justify="center"
         ).grid(column=0, row=0)
 
-        last_written_label = None # pylint: disable=unused-variable
+        last_written_text = tkinter.StringVar()
 
         def process():
             self._tracker.track()
-            last_written_label = tkinter.Label(
-                bottom_frame,
-                text=f"Data last written at {datetime.datetime.now().isoformat()}",
-                font=("Arial Bold", 10)
-            )
-            last_written_label.grid(column=0, row=2)
+            last_written_text.set(f"Data last written at {datetime.datetime.now().isoformat()}")
             self._window.after(3000 if is_development_environment() else 30000, process)
 
         def start_process():
@@ -60,5 +55,11 @@ class App:
             text=f"Output file is {self._tracker.output_file_path}",
             font=("Arial Bold", 10)
         ).grid(column=0, row=1)
+
+        tkinter.Label(
+            bottom_frame,
+            textvariable=last_written_text,
+            font=("Arial Bold", 10)
+        ).grid(column=0, row=2)
 
         self._window.mainloop()
