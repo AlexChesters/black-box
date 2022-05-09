@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import tkinter
 from tkinter import messagebox
 
-from black_box.simulator.black_box import SimulatorConnectionError
+from black_box.simulator.black_box import SimulatorConnectionError, SimulatorNotInFlightError
 
 from .flight_tracker import FlightTracker
 from .utils.env import is_development_environment
@@ -48,6 +48,11 @@ class App:
                 messagebox.showerror(
                     "Connection Error",
                     "Could not establish connection to simulator. Verify MSFS is running and try again."
+                )
+            except SimulatorNotInFlightError:
+                messagebox.showerror(
+                    "Connection Error",
+                    "Flight has not begun. Spawn into an aircraft and try again."
                 )
 
         def start_process():

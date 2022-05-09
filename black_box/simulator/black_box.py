@@ -1,12 +1,16 @@
 import datetime
 import math
 from dataclasses import dataclass
+from numpy.testing import assert_almost_equal
 
 import SimConnect
 
 from ..utils.env import is_development_environment
 
 class SimulatorConnectionError(Exception):
+    pass
+
+class SimulatorNotInFlightError(Exception):
     pass
 
 @dataclass
@@ -37,6 +41,21 @@ class BlackBox:
             _time=five_seconds if is_development_environment() else thirty_seconds
         )
 
+    def raise_if_not_in_flight(self):
+        latitude = float(self.aircraft_requests.find("PLANE_LATITUDE").get())
+        longitude = float(self.aircraft_requests.find("PLANE_LONGITUDE").get())
+        on_ground = int(self.aircraft_requests.find("SIM_ON_GROUND").get())
+
+        # msfs says you are at these coordinates when not flying (i.e. in the menu)
+        # ideally there'd be a SimVar like IN_AIRCRAFT but...
+        try:
+            assert_almost_equal(latitude, 0.00040736537119006786)
+            assert_almost_equal(longitude, 0.01397450300629543)
+            if on_ground:
+                raise SimulatorNotInFlightError
+        except AssertionError:
+            pass
+
     def get_data(self):
         timestamp = datetime.datetime.now().isoformat()
         aircraft = self.aircraft_requests.find("TITLE")
@@ -47,6 +66,8 @@ class BlackBox:
         heading = self.aircraft_requests.find("PLANE_HEADING_DEGREES_TRUE")
         on_ground = self.aircraft_requests.find("SIM_ON_GROUND")
         fuel = self.aircraft_requests.find("FUEL_TOTAL_QUANTITY_WEIGHT")
+
+        self.raise_if_not_in_flight()
 
         return {
             "timestamp": str(timestamp),
