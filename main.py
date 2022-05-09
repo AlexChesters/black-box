@@ -1,3 +1,3 @@
-from flight_tracker.app import App
+from black_box.app import App
 
 App()

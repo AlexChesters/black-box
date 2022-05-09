@@ -17,7 +17,7 @@ class ResultsWriter:
 
         docs_path = os.path.join(
             os.path.expanduser("~/Documents"),
-            "Flight Tracker"
+            "Black Box"
         )
 
         try:

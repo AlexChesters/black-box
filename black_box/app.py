@@ -3,13 +3,13 @@ from dataclasses import dataclass
 
 import tkinter
 
-from .flight_tracker import FlightTracker
+from .black_box import BlackBox
 from .utils.env import is_development_environment
 
 @dataclass
 class App:
     def __init__(self):
-        self._tracker = FlightTracker()
+        self._black_box = BlackBox()
 
         self._window = tkinter.Tk()
 
@@ -36,7 +36,7 @@ class App:
         last_written_text = tkinter.StringVar()
 
         def process():
-            self._tracker.track()
+            self._black_box.track()
             last_written_timestamp = datetime.datetime.now().strftime("%H:%M:%S")
             last_written_text.set(f"Data last written at {last_written_timestamp}")
             self._window.after(3000 if is_development_environment() else 30000, process)
@@ -55,7 +55,7 @@ class App:
 
         tkinter.Label(
             bottom_frame,
-            text=f"Output file is {self._tracker.output_file_path}",
+            text=f"Output file is {self._black_box.output_file_path}",
             font=("Arial Bold", 10)
         ).grid(column=0, row=1)
 

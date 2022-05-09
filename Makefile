@@ -5,7 +5,7 @@ run:
 	ENVIRONMENT=development poetry run python main.py
 
 test:
-	poetry run pylint flight_tracker main.py
+	poetry run pylint black_box main.py
 
 clean:
 	rm -rf build
@@ -13,9 +13,9 @@ clean:
 
 build: clean test
 	poetry run pyinstaller \
-		--name "Flight Tracker" \
+		--name "Black Box" \
 		--noconsole \
 		--onefile \
 		--add-binary "./vendor/SimConnect.dll:." \
-		--icon "./assets/flight_tracker.ico" \
+		--icon "./assets/black_box.ico" \
 		main.py

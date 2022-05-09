@@ -42,4 +42,4 @@ jobs:
           role-to-assume: arn:aws:iam::008356366354:role/projects-live-bucket-BucketUploadRole-1USRJUF87S00F
           role-duration-seconds: 900
       - name: deploy application
-        run: aws s3 sync dist s3://projects-live-bucket-bucket-llkgmktc4xmo/flight-tracker --cache-control max-age=60 --acl public-read --delete
+        run: aws s3 sync dist s3://projects-live-bucket-bucket-llkgmktc4xmo/black-box --cache-control max-age=60 --acl public-read --delete

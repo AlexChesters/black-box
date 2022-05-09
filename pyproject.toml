@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "flight-tracker"
+name = "black-box"
 version = "0.0.0"
-description = "simple flight tracker for MSFS"
+description = "record data about your MSFS"
 authors = ["Alex Chesters <10558792+AlexChesters@users.noreply.github.com>"]
 license = "MIT"
 

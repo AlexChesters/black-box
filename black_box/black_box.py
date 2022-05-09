@@ -4,7 +4,7 @@ from .results.results_writer import ResultsWriter
 from .simulator.flight import Flight
 
 @dataclass
-class FlightTracker:
+class BlackBox:
     def __init__(self):
         self._flight = Flight()
 
