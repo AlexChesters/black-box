@@ -1,8 +1,8 @@
 import datetime
 import math
 from dataclasses import dataclass
-from numpy.testing import assert_almost_equal
 
+from numpy.testing import assert_almost_equal
 import SimConnect
 
 from ..utils.env import is_development_environment
