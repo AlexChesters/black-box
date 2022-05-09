@@ -10,7 +10,7 @@ class SimulatorConnectionError(Exception):
     pass
 
 @dataclass
-class Flight:
+class BlackBox:
     def __init__(self):
         try:
             sim_connect = SimConnect.SimConnect()
