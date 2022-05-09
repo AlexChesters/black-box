@@ -4,11 +4,12 @@ from dataclasses import dataclass
 import tkinter
 
 from .black_box import BlackBox
+from .utils.env import is_development_environment
 
 @dataclass
 class App:
     def __init__(self):
-        self._black_box = BlackBox(self.on_data_update)
+        self._black_box = BlackBox()
 
         self._window = tkinter.Tk()
 
@@ -32,13 +33,16 @@ class App:
             justify="center"
         ).grid(column=0, row=0)
 
-        self._last_written_text = tkinter.StringVar()
+        last_written_text = tkinter.StringVar()
+
+        def process():
+            self._black_box.track()
+            last_written_timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+            last_written_text.set(f"Data last written at {last_written_timestamp}")
+            self._window.after(3000 if is_development_environment() else 30000, process)
 
         def start_process():
-            self._window.after(
-                0,
-                lambda _: self._black_box.track(self._window.after)
-            )
+            self._window.after(0, process)
 
         tkinter.Button(
             center_frame,
@@ -57,12 +61,8 @@ class App:
 
         tkinter.Label(
             bottom_frame,
-            textvariable=self._last_written_text,
+            textvariable=last_written_text,
             font=("Arial Bold", 10)
         ).grid(column=0, row=2)
 
         self._window.mainloop()
-
-    def on_data_update(self):
-        last_written_timestamp = datetime.datetime.now().strftime("%H:%M:%S")
-        self._last_written_text.set(f"Data last written at {last_written_timestamp}")
