@@ -14,8 +14,6 @@ class BlackBox:
     fieldnames = [
         "timestamp",
         "aircraft",
-        "departure",
-        "arrival",
         "altitude",
         "latitude",
         "longitude",
