@@ -2,6 +2,9 @@ import datetime
 from dataclasses import dataclass
 
 import tkinter
+from tkinter import messagebox
+
+from black_box.simulator.black_box import SimulatorConnectionError
 
 from .flight_tracker import FlightTracker
 from .utils.env import is_development_environment
@@ -36,10 +39,16 @@ class App:
         last_written_text = tkinter.StringVar()
 
         def process():
-            self._flight_tracker.track()
-            last_written_timestamp = datetime.datetime.now().strftime("%H:%M:%S")
-            last_written_text.set(f"Data last written at {last_written_timestamp}")
-            self._window.after(3000 if is_development_environment() else 30000, process)
+            try:
+                self._flight_tracker.track()
+                last_written_timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+                last_written_text.set(f"Data last written at {last_written_timestamp}")
+                self._window.after(3000 if is_development_environment() else 30000, process)
+            except SimulatorConnectionError:
+                messagebox.showerror(
+                    "Connection Error",
+                    "Could not establish connection to simulator. Verify MSFS is running and try again."
+                )
 
         def start_process():
             self._window.after(0, process)

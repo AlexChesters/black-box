@@ -11,6 +11,20 @@ class SimulatorConnectionError(Exception):
 
 @dataclass
 class BlackBox:
+    fieldnames = [
+        "timestamp",
+        "aircraft",
+        "departure",
+        "arrival",
+        "altitude",
+        "latitude",
+        "longitude",
+        "ground_speed",
+        "heading",
+        "on_ground",
+        "fuel"
+    ]
+
     def __init__(self):
         try:
             sim_connect = SimConnect.SimConnect()
@@ -24,19 +38,6 @@ class BlackBox:
             sim_connect,
             _time=five_seconds if is_development_environment() else thirty_seconds
         )
-        self.fieldnames = [
-            "timestamp",
-            "aircraft",
-            "departure",
-            "arrival",
-            "altitude",
-            "latitude",
-            "longitude",
-            "ground_speed",
-            "heading",
-            "on_ground",
-            "fuel"
-        ]
 
     def get_data(self):
         timestamp = datetime.datetime.now().isoformat()
