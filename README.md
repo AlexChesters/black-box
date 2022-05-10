@@ -5,7 +5,7 @@ record data about your [MSFS](https://www.flightsimulator.com/) flights
 outputs information from a current MSFS flight to a CSV file in `~/Documents/Black Box`
 
 # can I use it?
-if you have the PC version of MSFS then yes (although be aware that currently this program is an alpha so don't expect perfection)
+if you have the PC version of MSFS then yes (although be aware that currently this program is very much a work-in-progress and the executable isn't signed)
 
 1. download the [executable](https://projects.alexchesters.com/black-box/Black%20Box.exe)
 1. place the executable wherever you'd like (it doesn't need to be on the same drive that MSFS is installed on, but it does need to be on the same PC)
